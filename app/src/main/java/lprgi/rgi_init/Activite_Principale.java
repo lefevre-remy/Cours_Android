@@ -1,6 +1,7 @@
 package lprgi.rgi_init;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,8 +26,38 @@ public class Activite_Principale extends AppCompatActivity {
 
         //lorsque l'on clique avec le bouton
         boutonAvecRetour.setOnClickListener(v->{
+            Intent monIntent=new Intent(this, ActiviteTertiaire.class);
 
+            Bundle monBundle = new Bundle();
+            monBundle.putDouble("clef_pi", Math.PI);
+            monBundle.putCharSequence("une_chaine","AbbA");
+
+            monIntent.putExtras(monBundle);
+
+            startActivityForResult(monIntent, 456);
+            //
+            //
+            //
         });
+    }
+
+    //auto-généré par ctrl+o onactivity...
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode){
+
+            case  456 : {
+                Bundle unBundle = data.getExtras();
+
+                double d = unBundle.getDouble("retour_double");
+                CharSequence cq=unBundle.getCharSequence("retour_chaine");
+                textViewResultat.setText(d + " " + cq);
+                //
+                //
+                //
+            };break;
+
+        }
     }
 
     //méthode créer automatique depuis le onclick xml
